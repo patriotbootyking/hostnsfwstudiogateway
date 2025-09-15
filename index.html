@@ -1,0 +1,348 @@
+<!--
+SFW LANDING PAGE (One-file, no build tools)
+Purpose: Act as a compliant, SFW gateway to off-site 18+ content with age notice + affiliate disclosure.
+Instructions:
+1) Replace OUTBOUND_URL below with your SFW gateway or adult destination URL.
+2) Replace BRAND_NAME and SOCIAL links if you want.
+3) Keep this page SFW. Do not embed explicit imagery or language.
+4) Optional: Host at your own domain (recommended) and use HTTPS.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Host NSFW Studio — SFW Gateway</title>
+  <meta name="description" content="Clean, SFW gateway page with age notice and clear affiliate disclosure. Subtle effects, fast, and mobile‑friendly." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+  <meta property="og:title" content="Host NSFW Studio — SFW Gateway" />
+  <meta property="og:description" content="This page is safe for work. Adults can continue off‑site after a quick age confirmation and disclosure." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://dummyimage.com/1200x630/0f0f15/ffffff&text=Host+NSFW+Studio+%E2%80%94+SFW+Gateway" />
+  <meta name="theme-color" content="#0d0f1a" />
+  <style>
+    :root{
+      --bg1:#0b0e1a; --bg2:#111428; --txt:#f2f4fa; --muted:#9aa3b2; --brand:#9a7cff; --accent:#62f0c8; --warn:#ffd580;
+      --glass: rgba(255,255,255,.06);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--txt); font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 10% 10%, #1a1d35 0%, transparent 60%),
+                  radial-gradient(1200px 800px at 90% 30%, #1b2c38 0%, transparent 60%),
+                  linear-gradient(120deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+    /* Animated gradient aura */
+    .aura{position:fixed; inset:-20%; z-index:-1; filter:blur(60px); opacity:.55; mix-blend-mode:screen;
+      background: conic-gradient(from 0deg, #7c3aed, #14b8a6, #eab308, #ec4899, #7c3aed);
+      animation: spin 18s linear infinite;
+    }
+    @keyframes spin{to{transform:rotate(1turn)}}
+
+    header{position:sticky; top:0; z-index:10; backdrop-filter:saturate(150%) blur(10px); background:linear-gradient(to bottom, rgba(5,7,12,.7), rgba(5,7,12,0));}
+    .nav{max-width:1100px; margin:0 auto; padding:14px 18px; display:flex; align-items:center; justify-content:space-between}
+    .brand{display:flex; gap:10px; align-items:center; font-weight:800; letter-spacing:.3px}
+    .brand .logo{width:28px; height:28px; border-radius:10px; background:linear-gradient(135deg, var(--brand), var(--accent)); box-shadow:0 10px 30px rgba(154,124,255,.3)}
+    .nav a{color:var(--muted); text-decoration:none; margin-left:18px; font-weight:600}
+    .nav a:hover{color:var(--txt)}
+
+    .container{max-width:1100px; margin:0 auto; padding:40px 18px}
+
+    .hero{display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:center; padding:42px 0}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}}
+
+    .card{background:var(--glass); border:1px solid rgba(255,255,255,.08); border-radius:20px; padding:22px; box-shadow: 0 10px 30px rgba(0,0,0,.35)}
+    .hero h1{font-family:"Plus Jakarta Sans", Inter, system-ui; font-size:clamp(28px, 4.2vw, 48px); line-height:1.06; margin:0 0 10px}
+    .lead{color:var(--muted); font-size:clamp(14px, 1.4vw, 18px)}
+
+    /* Magnetic/shine CTA */
+    .cta{--shine:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.35) 45%, transparent 60%);
+      position:relative; display:inline-flex; align-items:center; gap:10px; padding:14px 18px; border-radius:16px; border:1px solid rgba(255,255,255,.18);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); cursor:pointer; text-decoration:none; color:var(--txt); font-weight:800;
+      box-shadow:0 12px 30px rgba(154,124,255,.22), inset 0 0 0 1px rgba(255,255,255,.06);
+      overflow:hidden; transform:translateZ(0); will-change:transform;
+    }
+    .cta:before{content:""; position:absolute; inset:-200% -50%; background:var(--shine); transform:translateX(-100%); animation:shine 4s linear infinite}
+    @keyframes shine{0%{transform:translateX(-100%)}60%{transform:translateX(120%)}100%{transform:translateX(120%)}}
+    .cta:hover{transform: translateY(-2px)}
+
+    .pill{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:99px; border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.05); color:var(--muted); font-weight:700; font-size:12px}
+
+    .features{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:20px}
+    @media (max-width:900px){.features{grid-template-columns:1fr}}
+
+    .reveal{opacity:0; transform:translateY(16px); transition: all .7s ease}
+    .reveal.visible{opacity:1; transform:none}
+
+    .tilt{transition: transform .2s ease}
+
+    .legal{font-size:13px; color:var(--muted)}
+
+    /* Age gate modal */
+    .modal{position:fixed; inset:0; backdrop-filter:blur(14px) saturate(140%); background:rgba(5,7,12,.65); display:none; align-items:center; justify-content:center; z-index:50}
+    .modal.open{display:flex}
+
+    /* Footer */
+    footer{padding:40px 18px; border-top:1px solid rgba(255,255,255,.08); background:linear-gradient(to top, rgba(0,0,0,.2), transparent)}
+    .footer-grid{max-width:1100px; margin:0 auto; display:grid; grid-template-columns:2fr 1fr 1fr; gap:20px}
+    @media (max-width:900px){.footer-grid{grid-template-columns:1fr}}
+    .mutelink{color:var(--muted); text-decoration:none}
+    .mutelink:hover{color:var(--txt)}
+
+    /* Floating sparkles */
+    .sparkle{position:fixed; width:6px; height:6px; border-radius:50%; background:radial-gradient(circle, #fff, rgba(255,255,255,0)); pointer-events:none; opacity:.8; filter:blur(.2px)}
+  </style>
+</head>
+<body>
+  <div class="aura" aria-hidden="true"></div>
+  <header>
+    <nav class="nav">
+      <div class="brand"><div class="logo" aria-hidden="true"></div><span id="brandName">Host NSFW Studio Gateway</span></div>
+      <div class="links">
+        <a href="#about">About</a>
+        <a href="#policy">Policy</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="col card tilt">
+        <span class="pill">SFW Gateway • No explicit content on this page</span>
+        <h1>Clean entry point — <span style="color:var(--brand)">age‑aware</span>, transparent, and fast.</h1>
+        <p class="lead">This is a safe‑for‑work landing page. If you choose to continue, you’ll visit an external site intended for adults (18+) only.
+          We keep things clear: you’ll see an age notice and an affiliate disclosure before you go.</p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin:18px 0 8px">
+          <a id="proceedBtn" class="cta" href="#" rel="noopener noreferrer" target="_blank" aria-disabled="true">▶ Continue (18+)</a>
+          <button id="copyBtn" class="cta" type="button">⧉ Copy Link</button>
+        </div>
+        <div class="legal" style="margin-top:10px">
+          <strong>Disclosure:</strong> Some outgoing links may earn me a commission. I only link to permitted platforms. You can read details below.
+        </div>
+      </div>
+      <div class="col card reveal" style="min-height:280px">
+        <h3 style="margin:0 0 10px">Your link settings</h3>
+        <p class="legal">Set your outbound URL (kept visible for transparency). You can also append UTM parameters for tracking.</p>
+        <label class="legal" for="url">Destination URL</label>
+        <input id="url" type="url" placeholder="https://pornmaker.ai/share?id=42128c64-3f9f-4606-bd3f-1f4504f762c2" style="width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.06); color:var(--txt); margin:6px 0 10px" />
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px">
+          <input id="utm_source" placeholder="utm_source" style="padding:10px; border-radius:12px; border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.06); color:var(--txt)">
+          <input id="utm_medium" placeholder="utm_medium" style="padding:10px; border-radius:12px; border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.06); color:var(--txt)">
+          <input id="utm_campaign" placeholder="utm_campaign" style="padding:10px; border-radius:12px; border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.06); color:var(--txt)">
+        </div>
+        <div style="display:flex; gap:10px; margin-top:12px">
+          <button id="applyBtn" class="cta" type="button">↻ Update Link</button>
+          <button id="resetBtn" class="cta" type="button">⟲ Reset</button>
+        </div>
+        <p class="legal" style="margin-top:12px">Current outbound link: <a id="currentLink" class="mutelink" href="#" target="_blank" rel="noopener">(not set)</a></p>
+      </div>
+    </section>
+
+    <section class="features reveal" id="about">
+      <div class="card">
+        <h3>Transparent by design</h3>
+        <p class="legal">No obfuscation. This page shows where a link goes and why it’s labeled. You’re always in control.</p>
+      </div>
+      <div class="card">
+        <h3>Age‑aware</h3>
+        <p class="legal">Adults only beyond this page. A simple confirmation keeps the main link locked until verified on your device.</p>
+      </div>
+      <div class="card">
+        <h3>Performance & polish</h3>
+        <p class="legal">Subtle motion, smart reveal, and a lightweight build (no heavy frameworks) so it feels instant.</p>
+      </div>
+    </section>
+
+    <section class="card reveal" id="policy" style="margin-top:20px">
+      <h3>Policy & Disclosure</h3>
+      <details open>
+        <summary><strong>Affiliate disclosure</strong></summary>
+        <p class="legal">Links from this page may be affiliate links. If you use them, I may earn a commission at no extra cost to you.</p>
+      </details>
+      <details>
+        <summary><strong>Age notice (18+)</strong></summary>
+        <p class="legal">The external site is meant for adults (18+) only. If you’re under 18 or this content isn’t legal where you live, please do not continue.</p>
+      </details>
+      <details>
+        <summary><strong>Consent & content</strong></summary>
+        <p class="legal">I do not post explicit material here. Any mature material off‑site follows platform rules and is intended for consenting adults only. No non‑consensual, exploitative, or real‑person deepfake material is supported.</p>
+      </details>
+    </section>
+
+    <section class="card reveal" id="contact" style="margin-top:20px">
+      <h3>Create Your Own Content</h3>
+      <p class="legal">Want to create your own content? Check it out here -> <a class="cta" href="https://pornmaker.ai?ref=5i1GbC2n" target="_blank">Content Creator Site</a> </p>
+    </section>
+
+    <section class="card reveal" id="contact" style="margin-top:20px">
+      <h3>Contact</h3>
+      <p class="legal">Questions or feedback? Email <a class="mutelink" href="mailto:hello@example.com">hello@example.com</a> or DM on X: <a class="mutelink" href="#">@yourhandle</a>.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:8px"><div class="logo" aria-hidden="true"></div><span style="font-weight:800">Host NSFW Studio Gateway</span></div>
+        <p class="legal">© <span id="year"></span> Host NSFW Studio Gateway. All rights reserved.</p>
+      </div>
+      <div>
+        <h4 style="margin:0 0 8px">Links</h4>
+        <p class="legal"><a class="mutelink" href="#about">About</a> · <a class="mutelink" href="#policy">Policy</a> · <a class="mutelink" href="#contact">Contact</a></p>
+      </div>
+      <div>
+        <h4 style="margin:0 0 8px">Social</h4>
+        <p class="legal"><a class="mutelink" href="https://www.tumblr.com/patriotbootyking" target="_blank">Tumblr</a> · <a class="mutelink" href="#" target="_blank">Reddit</a> · <a class="mutelink" href="#" target="_blank">YouTube</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Age Gate Modal -->
+  <div id="ageModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="ageTitle" aria-describedby="ageDesc">
+    <div class="card" style="max-width:520px; text-align:center">
+      <h2 id="ageTitle" style="margin-top:0">Age Confirmation</h2>
+      <p id="ageDesc" class="legal">The next page is intended for adults (18+) only. Please confirm your age to enable the continue button.</p>
+      <div style="display:flex; gap:10px; justify-content:center; margin-top:10px; flex-wrap:wrap">
+        <button id="yes18" class="cta" type="button">I am 18+</button>
+        <button id="no18" class="cta" type="button">Take me back</button>
+      </div>
+      <p class="legal" style="margin-top:8px">This preference is stored on your device so you won't be asked again.</p>
+    </div>
+  </div>
+
+  <script>
+    // ======== CONFIG ========
+    const BRAND_NAME = 'Host NSFW Studio Gateway';
+    // Replace this with your SFW gateway or adult destination (keep it honest & transparent)
+    const DEFAULT_OUTBOUND_URL = 'https://pornmaker.ai/share?id=42128c64-3f9f-4606-bd3f-1f4504f762c2';
+
+    // ======== UTILITIES ========
+    const $ = (s,root=document)=>root.querySelector(s);
+    const $$ = (s,root=document)=>Array.from(root.querySelectorAll(s));
+
+    function setCurrentYear(){ $('#year').textContent = new Date().getFullYear(); }
+
+    function buildTrackedURL(base, params){
+      try{
+        const url = new URL(base);
+        Object.entries(params).forEach(([k,v])=>{ if(v) url.searchParams.set(k,v); });
+        return url.toString();
+      }catch(e){ return ''; }
+    }
+
+    function enableSparkles(){
+      const MAX = 30; const sparks = [];
+      for(let i=0;i<MAX;i++){
+        const s = document.createElement('div'); s.className='sparkle';
+        s.style.left = Math.random()*100+'%'; s.style.top = Math.random()*100+'%';
+        s.style.opacity = 0.2 + Math.random()*0.7; s.style.transform = `scale(${.6+Math.random()*1.2})`;
+        document.body.appendChild(s); sparks.push({el:s, vx:(Math.random()-.5)*.2, vy:(Math.random()-.5)*.2});
+      }
+      function tick(){
+        sparks.forEach(sp=>{
+          const r = sp.el.getBoundingClientRect();
+          let x = r.left + sp.vx; let y = r.top + sp.vy;
+          if(x<0||x>window.innerWidth) sp.vx*=-1; if(y<0||y>window.innerHeight) sp.vy*=-1;
+          sp.el.style.left = (r.left+sp.vx)+'px'; sp.el.style.top = (r.top+sp.vy)+'px';
+        }); requestAnimationFrame(tick);
+      } tick();
+    }
+
+    function magneticButtons(){
+      $$('.cta').forEach(btn=>{
+        btn.addEventListener('mousemove', e=>{
+          const r = e.currentTarget.getBoundingClientRect();
+          const dx = (e.clientX - r.left) / r.width - .5;
+          const dy = (e.clientY - r.top) / r.height - .5;
+          e.currentTarget.style.transform = `translateY(-2px) rotateX(${dy*6}deg) rotateY(${dx*6}deg)`;
+        });
+        btn.addEventListener('mouseleave', e=>{ e.currentTarget.style.transform='translateY(0)'; });
+      });
+    }
+
+    function tiltCards(){
+      $$('.tilt').forEach(card=>{
+        card.addEventListener('mousemove', e=>{
+          const r = card.getBoundingClientRect();
+          const dx = (e.clientX - r.left)/r.width - .5;
+          const dy = (e.clientY - r.top)/r.height - .5;
+          card.style.transform = `perspective(900px) rotateX(${dy*-6}deg) rotateY(${dx*6}deg)`;
+        });
+        card.addEventListener('mouseleave', ()=> card.style.transform='');
+      })
+    }
+
+    function reveals(){
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(en=>{ if(en.isIntersecting) en.target.classList.add('visible'); });
+      }, {threshold:.12});
+      $$('.reveal').forEach(el=>io.observe(el));
+    }
+
+    // Age gate logic
+    function openAgeGate(){ $('#ageModal').classList.add('open'); }
+    function closeAgeGate(){ $('#ageModal').classList.remove('open'); }
+    function isAdult(){ return localStorage.getItem('ageVerified')==='true'; }
+
+    // Link state
+    let outbound = DEFAULT_OUTBOUND_URL;
+
+    function updateLinkDisplay(){
+      const link = $('#currentLink');
+      const proceed = $('#proceedBtn');
+      link.href = outbound; link.textContent = outbound || '(not set)';
+      if(isAdult() && outbound){
+        proceed.setAttribute('href', outbound);
+        proceed.removeAttribute('aria-disabled');
+      }else{
+        proceed.setAttribute('href', 'https://pornmaker.ai/share?id=42128c64-3f9f-4606-bd3f-1f4504f762c2');
+        proceed.setAttribute('aria-disabled','true');
+      }
+    }
+
+    function applyFromInputs(){
+      const base = $('#url').value.trim();
+      if(!base){ outbound = ''; updateLinkDisplay(); return; }
+      outbound = buildTrackedURL(base, {
+        utm_source: $('#utm_source').value.trim(),
+        utm_medium: $('#utm_medium').value.trim(),
+        utm_campaign: $('#utm_campaign').value.trim(),
+      });
+      updateLinkDisplay();
+    }
+
+    function copyOutbound(){ if(!outbound) return alert('No link set yet.'); navigator.clipboard.writeText(outbound).then(()=> alert('Link copied!')); }
+
+    function readQuery(){
+      const url = new URL(location.href);
+      const u = url.searchParams.get('u');
+      if(u){ try{ $('#url').value = decodeURIComponent(u); }catch(e){} }
+      const s = url.searchParams.get('s'); if(s) $('#utm_source').value=s;
+      const m = url.searchParams.get('m'); if(m) $('#utm_medium').value=m;
+      const c = url.searchParams.get('c'); if(c) $('#utm_campaign').value=c;
+    }
+
+    function init(){
+      setCurrentYear();
+      document.title = `${BRAND_NAME} — SFW Gateway`;
+      $('#brandName').textContent = BRAND_NAME;
+      readQuery();
+      if(!isAdult()) openAgeGate();
+      applyFromInputs();
+      $('#applyBtn').addEventListener('click', applyFromInputs);
+      $('#resetBtn').addEventListener('click', ()=>{ $('#url').value=''; $('#utm_source').value=''; $('#utm_medium').value=''; $('#utm_campaign').value=''; applyFromInputs(); });
+      $('#copyBtn').addEventListener('click', copyOutbound);
+      $('#yes18').addEventListener('click', ()=>{ localStorage.setItem('ageVerified','true'); closeAgeGate(); updateLinkDisplay(); });
+      $('#no18').addEventListener('click', ()=>{ localStorage.removeItem('ageVerified'); window.history.length>1 ? history.back() : location.replace('https://google.com'); });
+      magneticButtons(); tiltCards(); reveals(); enableSparkles();
+    }
+
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
